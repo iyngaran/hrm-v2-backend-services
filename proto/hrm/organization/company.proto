@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package hrm.v1;
+
+// Import common types (which includes timestamp)
+import "common/types.proto";
+
+service CompanyService {
+  rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse) {}
+}
+
+message CreateCompanyRequest {
+  string name = 1;
+  string registration_number = 2;
+  string tax_id = 3;
+  string address = 4;
+  string logo_url = 5;
+  string website_url = 6;
+  string phone_number = 7;
+}
+
+message Company {
+  string id = 1;
+  string name = 2;
+  string registration_number = 3;
+  string tax_id = 4;
+  string address = 5;
+  string logo_url = 6;
+  string website_url = 7;
+  string phone_number = 8;
+  // Use common timestamp fields
+  common.TimestampFields timestamps = 9;
+}
+
+message CreateCompanyResponse {
+  string id = 1;
+  string name = 2;
+  string registration_number = 3;
+  string tax_id = 4;
+  string address = 5;
+  string logo_url = 6;
+  string website_url = 7;
+  string phone_number = 8;
+  // Use common timestamp fields
+  common.TimestampFields timestamps = 9;
+}
+
+message OrganizationalUnit {
+  string id = 1;
+  string unit_number = 2;
+  string name = 3;
+  Company company = 4;
+  OrganizationalUnit parent = 5;
+  // Use common timestamp fields
+  common.TimestampFields timestamps = 6;
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+// Common Types Package
+// Import this file when you need common types and timestamp functionality
+package common;
+
+// Re-export commonly used Google types
+import "google/protobuf/timestamp.proto";
+
+// Common timestamp mixin - can be embedded in other messages
+message TimestampFields {
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp updated_at = 2;
+  google.protobuf.Timestamp deleted_at = 3;
+}
+
+// Common pagination
+message PaginationRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message PaginationResponse {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 total_count = 3;
+  int32 total_pages = 4;
+  bool has_next = 5;
+  bool has_previous = 6;
+}
+
+// Common response status
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_SUCCESS = 1;
+  STATUS_ERROR = 2;
+  STATUS_NOT_FOUND = 3;
+  STATUS_VALIDATION_ERROR = 4;
+}
+
+// Common error
+message Error {
+  string code = 1;
+  string message = 2;
+  string field = 3;
+}

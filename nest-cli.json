@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "./",
+  "entryFile": "/src/main",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/api-gateway",
+  "projects": {
+    "libs": {
+      "type": "library",
+      "root": "libs/libs",
+      "entryFile": "index",
+      "sourceRoot": "libs/libs/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/libs/tsconfig.lib.json"
+      }
+    },
+    "api-gateway": {
+      "type": "application",
+      "root": "apps/api-gateway",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api-gateway/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../../proto/**/*.proto",
+            "outDir": "proto"
+          }
+        ],
+        "watchAssets": true
+      }
+    },
+    "hrm-service": {
+      "type": "application",
+      "root": "apps/hrm-service",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/hrm-service/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../../proto/**/*.proto",
+            "outDir": "proto"
+          }
+        ],
+        "watchAssets": true
+      }
+    },
+    "user-service": {
+      "type": "application",
+      "root": "apps/user-service",
+      "entryFile": "src/main",
+      "sourceRoot": "./",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user-service/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../../proto/**/*.proto",
+            "outDir": "proto"
+          }
+        ],
+        "watchAssets": true
+      }
+    }
+  }
+}

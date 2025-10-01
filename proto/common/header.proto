@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// Common Header for All Services
+// This file contains all commonly used imports across the entire project
+package common;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
+// Standard Google Protocol Buffer imports that are used across services
+import "google/protobuf/timestamp.proto";
+
+// Common options for code generation
+// For NestJS/TypeScript usage, most language-specific options are not needed
+// Uncomment below if you plan to generate code for other languages in the future:
+
+// option go_package = "github.com/your-org/hrm/proto/common";
+// option java_package = "com.yourorg.hrm.proto.common";
+// option java_multiple_files = true;
+// option csharp_namespace = "YourOrg.Hrm.Proto.Common";
+
+// Note: This file should be imported by other proto files that need these common imports
+// Usage: import "common/header.proto";
