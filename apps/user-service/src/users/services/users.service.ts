@@ -1,16 +1,20 @@
-import { CreateUserRequest, CreateUserResponse } from '@app/libs';
-import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user.entity';
-import { PinoLogger } from 'nestjs-pino/PinoLogger';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { GenericConfigService } from '@app/libs';
+import {
+  CreateUserRequest,
+  CreateUserResponse,
+  GenericConfigService,
+} from '@app/libs';
 import { UserServiceEnv } from '@app/libs/nestjs/app-config/env/user-service.env';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PinoLogger } from 'nestjs-pino/PinoLogger';
+import { Repository } from 'typeorm';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     protected readonly logger: PinoLogger,
+    private readonly userService: UsersService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly configService: GenericConfigService<UserServiceEnv>,
   ) {
