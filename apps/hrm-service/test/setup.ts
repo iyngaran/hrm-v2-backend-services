@@ -8,11 +8,8 @@ jest.setTimeout(30000); // 30 seconds
 process.env.NODE_ENV = 'test';
 process.env.GRPC_PORT = '0'; // Use random available port for gRPC testing
 
-// Mock external dependencies for HRM Service tests
-beforeAll(async () => {
-  // Setup test database connections, mock external gRPC services, etc.
-});
-
+// Global cleanup to ensure Jest exits properly
 afterAll(async () => {
-  // Cleanup resources
+  // Force cleanup of any remaining connections
+  await new Promise((resolve) => setTimeout(resolve, 100));
 });

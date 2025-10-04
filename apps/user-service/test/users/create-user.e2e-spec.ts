@@ -1,52 +1,95 @@
-// test/user.e2e-spec.ts
-
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-
+import { ClientGrpc, ClientsModule, Transport } from '@nestjs/microservices';
+import { Test, TestingModule } from '@nestjs/testing';
 import { join } from 'path';
-import { Transport, ClientGrpc } from '@nestjs/microservices';
-
 import { lastValueFrom } from 'rxjs';
-import { UserServiceModule } from '../../src/user-service.module';
 import {
   CreateUserRequest,
   CreateUserResponse,
   UserServiceClient,
-} from '../../../../proto/user-service/users/user';
+} from '../../../../generated/typescript/user-service/users/user';
+import { UserServiceModule } from '../../src/user-service.module';
 
 describe('UserService (gRPC) E2E', () => {
   let app: INestApplication;
-  let grpcClient: ClientGrpc;
+  let clientApp: INestApplication;
+  let client: ClientGrpc;
   let userService: UserServiceClient;
 
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+    // Create the server application
+    const serverModule: TestingModule = await Test.createTestingModule({
       imports: [UserServiceModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = serverModule.createNestApplication();
 
+    // Configure the gRPC microservice server
     app.connectMicroservice({
       transport: Transport.GRPC,
       options: {
         package: 'user.v1',
-        protoPath:
-          process.env.NODE_ENV === 'production'
-            ? join(__dirname, '../../../proto/user-service/users/user.proto')
-            : join(process.cwd(), 'proto/user-service/users/user.proto'),
+        protoPath: join(
+          __dirname,
+          '../../../../proto/user-service/users/user.proto',
+        ),
         url: 'localhost:50051',
+        loader: {
+          includeDirs: [
+            join(__dirname, '../../../../proto'),
+            join(__dirname, '../../../../proto/common'),
+          ],
+        },
       },
     });
 
     await app.startAllMicroservices();
     await app.init();
 
-    grpcClient = app.get('UserService'); // Use the string token registered for the gRPC client
-    userService = grpcClient.getService<UserServiceClient>('UserService');
+    // Create the client application
+    const clientModule: TestingModule = await Test.createTestingModule({
+      imports: [
+        ClientsModule.register([
+          {
+            name: 'USER_SERVICE_PACKAGE',
+            transport: Transport.GRPC,
+            options: {
+              package: 'user.v1',
+              protoPath: join(
+                __dirname,
+                '../../../../proto/user-service/users/user.proto',
+              ),
+              url: 'localhost:50051',
+              loader: {
+                includeDirs: [
+                  join(__dirname, '../../../../proto'),
+                  join(__dirname, '../../../../proto/common'),
+                ],
+              },
+            },
+          },
+        ]),
+      ],
+    }).compile();
+
+    clientApp = clientModule.createNestApplication();
+    await clientApp.init();
+
+    // Get the gRPC client
+    client = clientApp.get('USER_SERVICE_PACKAGE');
+    userService = client.getService<UserServiceClient>('UserService');
+
+    // Wait a moment for the service to be fully ready
+    await new Promise((resolve) => setTimeout(resolve, 2000));
   });
 
   afterAll(async () => {
-    await app.close();
+    if (clientApp) {
+      await clientApp.close();
+    }
+    if (app) {
+      await app.close();
+    }
   });
 
   it('should create a user successfully', async () => {
