@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger, PinoLogger } from 'nestjs-pino';
+import 'source-map-support/register';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {

@@ -189,12 +189,12 @@ swc src -d dist --strip-leading-paths
 
 ### Compilation Speed Comparison
 
-| Tool       | Time (1000 files) | Relative Speed   |
-| ---------- | ----------------- | ---------------- |
-| **SWC**    | 0.8s              | **1x (fastest)** |
-| esbuild    | 1.2s              | 1.5x slower      |
-| Babel      | 16s               | **20x slower**   |
-| TypeScript | 25s               | **31x slower**   |
+| Tool       | Time (1000 files) | Relative Speed |
+| ---------- | ----------------- | -------------- |
+| SWC        | 0.8s              | 1x (fastest)   |
+| esbuild    | 1.2s              | 1.5x slower    |
+| Babel      | 16s               | 20x slower     |
+| TypeScript | 25s               | 31x slower     |
 
 ### Memory Usage
 

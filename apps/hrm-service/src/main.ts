@@ -4,6 +4,7 @@ import type { MicroserviceOptions } from '@nestjs/microservices';
 import { Transport } from '@nestjs/microservices';
 import { Logger, PinoLogger } from 'nestjs-pino';
 import { join } from 'node:path';
+import 'source-map-support/register';
 import { HrmServiceModule } from './hrm-service.module';
 
 async function bootstrap(): Promise<void> {
