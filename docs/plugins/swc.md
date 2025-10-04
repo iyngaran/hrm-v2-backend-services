@@ -19,7 +19,6 @@ swc packages/*/src -d packages/*/dist --config-file .swcrc
 
 ### 4. **Development Workflow**
 
-````bashenefits)
 - [Project Usage](#project-usage)
 - [Configuration](#configuration)
 - [Common Use Cases](#common-use-cases)
@@ -65,26 +64,27 @@ class MyComponent extends Component<Props> {
 
 // Compiled Output (ES5)
 var MyComponent = /** @class */ (function (_super) {
-    __extends(MyComponent, _super);
-    function MyComponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    MyComponent.prototype.fetchData = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch('/api/data')];
-                    case 1:
-                        response = _a.sent();
-                        return [2 /*return*/, response.json()];
-                }
-            });
-        });
-    };
-    return MyComponent;
-}(Component));
-````
+  __extends(MyComponent, _super);
+  function MyComponent() {
+    return (_super !== null && _super.apply(this, arguments)) || this;
+  }
+  MyComponent.prototype.fetchData = function () {
+    return __awaiter(this, void 0, void 0, function () {
+      var response;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4 /*yield*/, fetch('/api/data')];
+          case 1:
+            response = _a.sent();
+            return [2 /*return*/, response.json()];
+        }
+      });
+    });
+  };
+  return MyComponent;
+})(Component);
+```
 
 ### Transformations Supported
 
