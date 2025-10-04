@@ -14,7 +14,6 @@ import { User } from '../entities/user.entity';
 export class UsersService {
   constructor(
     protected readonly logger: PinoLogger,
-    private readonly userService: UsersService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly configService: GenericConfigService<UserServiceEnv>,
   ) {
