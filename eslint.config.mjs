@@ -30,7 +30,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-      ],
+      ], // Will fail builds/commits when unused variables are found
       '@typescript-eslint/prefer-readonly': 'off', // Requires type checking
       '@typescript-eslint/prefer-nullish-coalescing': 'off', // Requires type checking
       '@typescript-eslint/prefer-optional-chain': 'off', // Requires type checking
