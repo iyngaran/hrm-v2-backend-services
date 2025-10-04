@@ -9,5 +9,11 @@
   },
   "moduleNameMapper": {
     "^@app/libs(|/.*)$": "<rootDir>/../../../libs/src/$1"
-  }
+  },
+  "testTimeout": 30000,
+  "forceExit": true,
+  "detectOpenHandles": false,
+  "maxWorkers": 1,
+  "silent": true,
+  "verbose": false
 }

@@ -33,49 +33,44 @@ export class UsersController implements UserServiceController {
   }
 
   findAllUsers(
-    _request: FindAllUsersRequest,
+    request: FindAllUsersRequest,
   ):
     | Promise<FindAllUsersResponse>
     | Observable<FindAllUsersResponse>
     | FindAllUsersResponse {
-    // TODO: Implement findAllUsers method
-    throw new Error('Method not implemented.');
+    return this.usersService.findAllUsers(request);
   }
 
   findOneUser(
-    _request: FindOneUserRequest,
+    request: FindOneUserRequest,
   ):
     | Promise<FindOneUserResponse>
     | Observable<FindOneUserResponse>
     | FindOneUserResponse {
-    // TODO: Implement findOneUser method
-    throw new Error('Method not implemented.');
+    return this.usersService.findOneUser(request);
   }
 
   updateUser(
-    _request: UpdateUserRequest,
+    request: UpdateUserRequest,
   ):
     | Promise<UpdateUserResponse>
     | Observable<UpdateUserResponse>
     | UpdateUserResponse {
-    // TODO: Implement updateUser method
-    throw new Error('Method not implemented.');
+    return this.usersService.updateUser(request);
   }
 
   removeUser(
-    _request: RemoveUserRequest,
+    request: RemoveUserRequest,
   ):
     | Promise<RemoveUserResponse>
     | Observable<RemoveUserResponse>
     | RemoveUserResponse {
-    // TODO: Implement removeUser method
-    throw new Error('Method not implemented.');
+    return this.usersService.removeUser(request);
   }
 
   queryUsers(
-    _request: Observable<QueryUsersRequest>,
+    request: Observable<QueryUsersRequest>,
   ): Observable<QueryUsersResponse> {
-    // TODO: Implement queryUsers method
-    throw new Error('Method not implemented.');
+    return this.usersService.queryUsers(request);
   }
 }
