@@ -18,6 +18,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:user-service:e2e": "jest --config ./apps/user-service/test/jest-e2e.json",
     "test:api-gateway:e2e": "jest --config ./apps/api-gateway/test/jest-e2e.json",
+    "test:hrm-service:e2e": "jest --config ./apps/hrm-service/test/jest-e2e.json",
     "quality:check": "pnpm lint:check && pnpm format:check && pnpm type:check",
     "quality:fix": "pnpm lint:fix && pnpm format:write",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
