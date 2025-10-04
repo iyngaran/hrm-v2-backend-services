@@ -8,7 +8,7 @@ This document provides a comprehensive overview of SWC and its core packages use
 - [@swc/core](#swccore)
 - [@swc/cli](#swccli)
 - [Key Features](#key-features)
-- [Performance Benefits](#per```
+- [Performance Benefits](#performance-benefits)
 
 ### 3. **Monorepo Builds**
 
