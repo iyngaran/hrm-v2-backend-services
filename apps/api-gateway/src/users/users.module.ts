@@ -1,7 +1,7 @@
-import { USER_V1_PACKAGE_NAME } from '@app/libs';
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { USER_V1_PACKAGE_NAME } from '../../../../generated/typescript/user-service/users/types';
 import { UserController } from './user.controller';
 import { UsersService } from './users.service';
 
