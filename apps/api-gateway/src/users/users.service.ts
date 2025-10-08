@@ -6,6 +6,14 @@ import {
   CreateUserResponse,
   FindAllUsersRequest,
   FindAllUsersResponse,
+  FindOneUserRequest,
+  FindOneUserResponse,
+  QueryUsersRequest,
+  QueryUsersResponse,
+  RemoveUserRequest,
+  RemoveUserResponse,
+  UpdateUserRequest,
+  UpdateUserResponse,
   USER_SERVICE_NAME,
   UserServiceClient,
 } from '../../../../generated/typescript/user-service/users/user';
@@ -24,5 +32,31 @@ export class UsersService {
     return this.client
       .getService<UserServiceClient>(USER_SERVICE_NAME)
       .findAllUsers(request);
+  }
+
+  findOneUser(request: FindOneUserRequest): Observable<FindOneUserResponse> {
+    return this.client
+      .getService<UserServiceClient>(USER_SERVICE_NAME)
+      .findOneUser(request);
+  }
+
+  updateUser(request: UpdateUserRequest): Observable<UpdateUserResponse> {
+    return this.client
+      .getService<UserServiceClient>(USER_SERVICE_NAME)
+      .updateUser(request);
+  }
+
+  removeUser(request: RemoveUserRequest): Observable<RemoveUserResponse> {
+    return this.client
+      .getService<UserServiceClient>(USER_SERVICE_NAME)
+      .removeUser(request);
+  }
+
+  queryUsers(
+    request: Observable<QueryUsersRequest>,
+  ): Observable<QueryUsersResponse> {
+    return this.client
+      .getService<UserServiceClient>(USER_SERVICE_NAME)
+      .queryUsers(request);
   }
 }
