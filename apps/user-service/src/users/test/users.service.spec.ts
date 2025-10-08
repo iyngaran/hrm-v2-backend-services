@@ -76,9 +76,24 @@ describe('UsersService', () => {
     jest.clearAllMocks();
   });
 
+  /**
+   * BASIC DEFINITION TEST
+   *
+   * This test ensures that the UsersService is properly defined and instantiated
+   * within the testing module, confirming that all dependencies are correctly injected.
+   */
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  /**
+   * SERVICE INITIALIZATION TESTS
+   *
+   * This test suite ensures that the UsersService initializes correctly by:
+   * - Setting the appropriate logging context using PinoLogger
+   * - Fetching and logging essential configuration values (DB host, environment)
+   * - Verifying that dependencies (repository, logger, config service) are injected properly
+   */
 
   it('should initialize with proper context and configuration', () => {
     expect(mockPinoLogger.setContext).toHaveBeenCalledWith('UsersService');
@@ -91,6 +106,21 @@ describe('UsersService', () => {
     expect(mockConfigService.get).toHaveBeenCalledWith('NODE_ENV');
   });
 
+  /**
+   * CREATE USER TESTS
+   *
+   * This test suite validates the user creation functionality which:
+   * - Accepts CreateUserRequest with user details (firstName, lastName, email, phone, password)
+   * - Saves user data to the database via TypeORM repository
+   * - Returns a standardized response with status, message, data, and errors
+   * - Handles database errors gracefully and propagates them
+   * - Logs creation attempts and successful operations for audit trail
+   *
+   * Key behaviors tested:
+   * - Successful user creation with proper response structure
+   * - Error propagation when repository operations fail
+   * - Logging behavior during both success and failure scenarios
+   */
   describe('createUser', () => {
     it('should create a user successfully', async () => {
       // Arrange
@@ -163,6 +193,22 @@ describe('UsersService', () => {
     });
   });
 
+  /**
+   * FIND ALL USERS TESTS
+   *
+   * This test suite validates the findAllUsers functionality which:
+   * - Accepts FindAllUsersRequest with pagination parameters (page, limit)
+   * - Retrieves all users from the database using TypeORM find method
+   * - Returns users array wrapped in a response object
+   * - Handles empty result sets gracefully
+   * - Logs retrieval operations for monitoring and debugging
+   *
+   * Key behaviors tested:
+   * - Successful retrieval of multiple users with pagination
+   * - Handling of empty result sets (no users found)
+   * - Proper logging of find operations
+   * - Response structure consistency
+   */
   describe('findAllUsers', () => {
     it('should find all users successfully', async () => {
       // Arrange
@@ -217,6 +263,24 @@ describe('UsersService', () => {
     });
   });
 
+  /**
+   * FIND ONE USER TESTS
+   *
+   * This test suite validates the findOneUser functionality which:
+   * - Accepts FindOneUserRequest with user ID for lookup
+   * - Queries database using TypeORM findOne with where clause
+   * - Returns single user wrapped in response object when found
+   * - Throws NotFoundException when user doesn't exist
+   * - Throws BadRequestException for invalid/missing IDs
+   * - Logs successful lookups and warns about missing users
+   *
+   * Key behaviors tested:
+   * - Successful user retrieval by valid ID
+   * - NotFoundException handling for non-existent users
+   * - BadRequestException for empty/invalid IDs
+   * - Proper query construction with where clause
+   * - Logging behavior for both success and failure cases
+   */
   describe('findOneUser', () => {
     it('should find a user by ID successfully', async () => {
       // Arrange
@@ -279,6 +343,26 @@ describe('UsersService', () => {
     });
   });
 
+  /**
+   * UPDATE USER TESTS
+   *
+   * This test suite validates the updateUser functionality which:
+   * - Accepts UpdateUserRequest with user ID and fields to update
+   * - Verifies user exists before attempting update operation
+   * - Updates user data using TypeORM repository update method
+   * - Returns updated user data after successful modification
+   * - Throws NotFoundException when target user doesn't exist
+   * - Throws BadRequestException for invalid/missing IDs
+   * - Performs multiple database queries (find -> update -> find) for data consistency
+   *
+   * Key behaviors tested:
+   * - Successful user update with field modifications
+   * - Pre-update existence validation
+   * - Post-update data retrieval and return
+   * - NotFoundException for non-existent users
+   * - BadRequestException for invalid input
+   * - Database transaction-like behavior with multiple queries
+   */
   describe('updateUser', () => {
     it('should update a user successfully', async () => {
       // Arrange
@@ -357,6 +441,26 @@ describe('UsersService', () => {
     });
   });
 
+  /**
+   * REMOVE USER TESTS
+   *
+   * This test suite validates the removeUser functionality which:
+   * - Accepts RemoveUserRequest with user ID for deletion
+   * - Verifies user exists before attempting removal operation
+   * - Performs soft deletion using TypeORM softDelete method (preserves data integrity)
+   * - Returns confirmation message with user ID upon successful removal
+   * - Throws NotFoundException when target user doesn't exist
+   * - Throws BadRequestException for invalid/missing IDs
+   * - Logs warnings when users are not found for removal operations
+   *
+   * Key behaviors tested:
+   * - Successful soft deletion of existing users
+   * - Pre-deletion existence validation
+   * - Confirmation message generation with user ID
+   * - NotFoundException for non-existent users
+   * - BadRequestException for invalid input
+   * - Use of softDelete vs hard delete for data preservation
+   */
   describe('removeUser', () => {
     it('should remove a user successfully', async () => {
       // Arrange
@@ -421,6 +525,28 @@ describe('UsersService', () => {
     });
   });
 
+  /**
+   * QUERY USERS TESTS (REACTIVE/STREAMING)
+   *
+   * This test suite validates the queryUsers functionality which:
+   * - Accepts Observable<QueryUsersRequest> for reactive/streaming queries
+   * - Implements pagination with skip/take calculations based on page and limit
+   * - Orders results by createdAt in descending order (newest first)
+   * - Applies input validation and sanitization (limit caps, minimum values)
+   * - Returns Observable<QueryUsersResponse> for streaming responses
+   * - Handles various pagination scenarios and edge cases
+   *
+   * Key behaviors tested:
+   * - Successful paginated query with proper skip/take calculation
+   * - Pagination math verification for different page numbers
+   * - Input validation with maximum limit enforcement (cap at 100)
+   * - Input sanitization for negative or zero values (minimum of 1)
+   * - Observable pattern usage for reactive programming
+   * - Consistent ordering by creation timestamp
+   *
+   * Note: This method differs from findAllUsers by using reactive patterns
+   * and more sophisticated pagination logic, likely for gRPC streaming responses.
+   */
   describe('queryUsers', () => {
     it('should query users with pagination successfully', (done) => {
       // Arrange
