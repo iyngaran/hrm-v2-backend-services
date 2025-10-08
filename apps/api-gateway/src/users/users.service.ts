@@ -1,3 +1,6 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 import {
   CreateUserRequest,
   CreateUserResponse,
@@ -5,10 +8,7 @@ import {
   FindAllUsersResponse,
   USER_SERVICE_NAME,
   UserServiceClient,
-} from '@app/libs';
-import { Inject, Injectable } from '@nestjs/common';
-import { ClientGrpc } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+} from '../../../../generated/typescript/user-service/users/user';
 
 @Injectable()
 export class UsersService {
