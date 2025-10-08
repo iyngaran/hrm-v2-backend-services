@@ -225,7 +225,11 @@ describe('UserService - Advanced Integration Tests', () => {
 
       // Perform a series of operations that might fail
       for (let i = 0; i < 5; i++) {
-        const operation = async () => {
+        const operation = async (): Promise<{
+          success: boolean;
+          data?: any;
+          error?: any;
+        }> => {
           try {
             const response = await lastValueFrom(
               userService.findAllUsers({ page: '1', limit: '10' }),
