@@ -1,4 +1,3 @@
-import { USER_V1_PACKAGE_NAME } from '@app/libs';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import type { MicroserviceOptions } from '@nestjs/microservices';
@@ -6,6 +5,7 @@ import { Transport } from '@nestjs/microservices';
 import { Logger, PinoLogger } from 'nestjs-pino';
 import { join } from 'node:path';
 import 'source-map-support/register';
+import { USER_V1_PACKAGE_NAME } from '../../../generated/typescript/user-service/users/types';
 import { UserServiceModule } from './user-service.module';
 
 async function bootstrap(): Promise<void> {

@@ -1,18 +1,3 @@
-import {
-  CreateUserRequest,
-  CreateUserResponse,
-  FindAllUsersRequest,
-  FindAllUsersResponse,
-  FindOneUserRequest,
-  FindOneUserResponse,
-  GenericConfigService,
-  QueryUsersRequest,
-  QueryUsersResponse,
-  RemoveUserRequest,
-  RemoveUserResponse,
-  UpdateUserRequest,
-  UpdateUserResponse,
-} from '@app/libs';
 import { UserServiceEnv } from '@app/libs/nestjs/app-config/env/user-service.env';
 import {
   BadRequestException,
@@ -24,6 +9,21 @@ import { PinoLogger } from 'nestjs-pino/PinoLogger';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Repository } from 'typeorm';
+import {
+  CreateUserRequest,
+  CreateUserResponse,
+  FindAllUsersRequest,
+  FindAllUsersResponse,
+  FindOneUserRequest,
+  FindOneUserResponse,
+  QueryUsersRequest,
+  QueryUsersResponse,
+  RemoveUserRequest,
+  RemoveUserResponse,
+  UpdateUserRequest,
+  UpdateUserResponse,
+} from '../../../../../generated/typescript/user-service/users/user';
+import { GenericConfigService } from '../../../../../libs/src';
 import { User } from '../entities/user.entity';
 
 @Injectable()
@@ -56,6 +56,7 @@ export class UsersService {
       ...request,
     });
     this.logger.info('User created successfully: %o', user);
+
     return {
       status: 'success',
       message: 'User created successfully',

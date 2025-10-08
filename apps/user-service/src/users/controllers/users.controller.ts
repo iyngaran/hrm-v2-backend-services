@@ -1,3 +1,5 @@
+import { Controller } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import {
   CreateUserRequest,
   CreateUserResponse,
@@ -12,10 +14,8 @@ import {
   UpdateUserRequest,
   UpdateUserResponse,
   UserServiceController,
-} from '@app/libs';
-import { Controller } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { UserServiceControllerMethods } from '../../../../../proto/user-service/users/user';
+  UserServiceControllerMethods,
+} from '../../../../../generated/typescript/user-service/users/user';
 import { UsersService } from '../services/users.service';
 
 @Controller()

@@ -1,17 +1,17 @@
-import {
-  CreateUserRequest,
-  FindAllUsersRequest,
-  FindOneUserRequest,
-  GenericConfigService,
-  QueryUsersRequest,
-  RemoveUserRequest,
-  UpdateUserRequest,
-} from '@app/libs';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { PinoLogger } from 'nestjs-pino';
 import { of } from 'rxjs';
+import {
+  CreateUserRequest,
+  FindAllUsersRequest,
+  FindOneUserRequest,
+  QueryUsersRequest,
+  RemoveUserRequest,
+  UpdateUserRequest,
+} from '../../../../../generated/typescript/user-service/users/user';
+import { GenericConfigService } from '../../../../../libs/src';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';
 

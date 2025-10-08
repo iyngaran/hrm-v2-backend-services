@@ -1,9 +1,7 @@
 syntax = "proto3";
 
 package user.v1;
-
-// Import common types (which includes timestamp)
-import "common/types.proto";
+import "user-service/users/types.proto";
 
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
@@ -14,16 +12,6 @@ service UserService {
   rpc QueryUsers(stream QueryUsersRequest) returns (stream QueryUsersResponse) {}
 }
 
-message User {
-  string id = 1;
-  string first_name = 2;
-  string email = 4;
-  string primary_phone_number = 5;
-  repeated string phone_numbers = 6;
-  string password = 7;
-  // Use common timestamp fields
-  common.TimestampFields timestamps = 8;
-}
 
 message CreateUserRequest {
   string first_name = 1;

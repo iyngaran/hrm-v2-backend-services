@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "user-service/users/types.proto";
+
+service UserRoleService {
+  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse) {}
+  rpc RemoveRoleFromUser(RemoveRoleFromUserRequest) returns (RemoveRoleFromUserResponse) {}
+  rpc GetUserRoles(GetUserRolesRequest) returns (GetUserRolesResponse) {}
+  rpc GetRoleUsers(GetRoleUsersRequest) returns (GetRoleUsersResponse) {}
+}
+
+message AssignRoleToUserRequest {
+  string user_id = 1;
+  string role_id = 2;
+}
+
+message AssignRoleToUserResponse {
+  string status = 1;
+  string message = 2;
+  UserRole data = 3;
+  repeated string errors = 4;
+}
+
+message RemoveRoleFromUserRequest {
+  string user_id = 1;
+  string role_id = 2;
+}
+
+message RemoveRoleFromUserResponse {
+  string status = 1;
+  string message = 2;
+  repeated string errors = 3;
+}
+
+message GetUserRolesRequest {
+  string user_id = 1;
+}
+
+message GetUserRolesResponse {
+  repeated Role roles = 1;
+}
+
+message GetRoleUsersRequest {
+  string role_id = 1;
+}
+
+message GetRoleUsersResponse {
+  repeated User users = 1;
+}

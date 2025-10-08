@@ -7,12 +7,3 @@ package user.v1;
 // Common imports for user service
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
-
-// Code generation options
-option go_package = "github.com/your-org/hrm/proto/user/v1";
-option java_package = "com.yourorg.hrm.proto.user.v1";
-option java_multiple_files = true;
-option csharp_namespace = "YourOrg.Hrm.Proto.User.V1";
-
-// This file provides common imports for all user service proto files
-// Import this in your user.proto file

@@ -53,6 +53,7 @@ export class GenericTypeOrmConfigService<T extends Record<string, unknown>>
     if (process.env.NODE_ENV === 'production') {
       return { ...this.options, synchronize: false };
     }
+
     return this.options;
   }
 }

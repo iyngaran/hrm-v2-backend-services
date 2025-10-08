@@ -19,6 +19,36 @@ export enum Status {
   UNRECOGNIZED = -1,
 }
 
+export enum ResourceType {
+  RESOURCE_TYPE_UNSPECIFIED = 0,
+  RESOURCE_TYPE_EMPLOYEE = 1,
+  RESOURCE_TYPE_LEAVE = 2,
+  RESOURCE_TYPE_ATTENDANCE = 3,
+  RESOURCE_TYPE_PAYROLL = 4,
+  RESOURCE_TYPE_PERFORMANCE = 5,
+  UNRECOGNIZED = -1,
+}
+
+export enum ActionType {
+  ACTION_TYPE_UNSPECIFIED = 0,
+  ACTION_TYPE_CREATE = 1,
+  ACTION_TYPE_READ = 2,
+  ACTION_TYPE_UPDATE = 3,
+  ACTION_TYPE_DELETE = 4,
+  ACTION_TYPE_APPROVE = 5,
+  UNRECOGNIZED = -1,
+}
+
+export enum PermissionScope {
+  PERMISSION_SCOPE_UNSPECIFIED = 0,
+  PERMISSION_SCOPE_SELF = 1,
+  PERMISSION_SCOPE_TEAM = 2,
+  PERMISSION_SCOPE_DEPARTMENT = 3,
+  PERMISSION_SCOPE_BRANCH = 4,
+  PERMISSION_SCOPE_ORGANIZATION = 5,
+  UNRECOGNIZED = -1,
+}
+
 /** Common timestamp mixin - can be embedded in other messages */
 export interface TimestampFields {
   createdAt?: Timestamp | undefined;

@@ -7,20 +7,9 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
-import { TimestampFields } from "../../common/types";
+import { User } from "./types";
 
 export const protobufPackage = "user.v1";
-
-export interface User {
-  id: string;
-  firstName: string;
-  email: string;
-  primaryPhoneNumber: string;
-  phoneNumbers: string[];
-  password: string;
-  /** Use common timestamp fields */
-  timestamps?: TimestampFields | undefined;
-}
 
 export interface CreateUserRequest {
   firstName: string;

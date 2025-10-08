@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "common/types.proto";
+
+message User {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string primary_phone_number = 5;
+  repeated string phone_numbers = 6;
+  string password = 7;
+  bool is_active = 8;
+  bool is_email_verified = 9;
+  bool is_mfa_enabled = 10;
+  repeated Role roles = 11;
+  // Use common timestamp fields
+  common.TimestampFields timestamps = 12;
+}
+
+
+message Role {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated Permission permissions = 4;
+  common.TimestampFields timestamps = 5;
+}
+
+message UserRole {
+  string id = 1;
+  string user_id = 2;
+  string role_id = 3;
+  User user = 4;
+  Role role = 5;
+  common.TimestampFields timestamps = 6;
+}
+
+message Permission {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  common.ResourceType resource = 4;
+  common.ActionType action = 5;
+  common.PermissionScope scope = 6;
+  common.TimestampFields timestamps = 7;
+}

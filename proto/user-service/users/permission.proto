@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "common/types.proto";
+import "user-service/users/types.proto";
+
+service PermissionService {
+  rpc CreatePermission(CreatePermissionRequest) returns (CreatePermissionResponse) {}
+  rpc FindAllPermissions(FindAllPermissionsRequest) returns (FindAllPermissionsResponse) {}
+  rpc FindOnePermission(FindOnePermissionRequest) returns (FindOnePermissionResponse) {}
+  rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse) {}
+  rpc RemovePermission(RemovePermissionRequest) returns (RemovePermissionResponse) {}
+}
+
+
+message CreatePermissionRequest {
+  string name = 1;
+  string description = 2;
+  common.ResourceType resource = 3;
+  common.ActionType action = 4;
+  common.PermissionScope scope = 5;
+}
+
+message CreatePermissionResponse {
+  string status = 1;
+  string message = 2;
+  Permission data = 3;
+  repeated string errors = 4;
+}
+
+message FindAllPermissionsRequest {
+  string page = 1;
+  string limit = 2;
+}
+
+message FindAllPermissionsResponse {
+  repeated Permission permissions = 1;
+}
+
+message FindOnePermissionRequest {
+  string id = 1;
+}
+
+message FindOnePermissionResponse {
+  string status = 1;
+  string message = 2;
+  Permission data = 3;
+  repeated string errors = 4;
+}
+
+message UpdatePermissionRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  common.ResourceType resource = 4;
+  common.ActionType action = 5;
+  common.PermissionScope scope = 6;
+}
+
+message UpdatePermissionResponse {
+  string status = 1;
+  string message = 2;
+  Permission data = 3;
+  repeated string errors = 4;
+}
+
+message RemovePermissionRequest {
+  string id = 1;
+}
+
+message RemovePermissionResponse {
+  string status = 1;
+  string message = 2;
+  repeated string errors = 3;
+}

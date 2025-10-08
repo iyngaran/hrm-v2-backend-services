@@ -1,7 +1,8 @@
-import { CreateUserRequest, GenericConfigService } from '@app/libs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { PinoLogger } from 'nestjs-pino';
+import { CreateUserRequest } from '../../../../../generated/typescript/user-service/users/user';
+import { GenericConfigService } from '../../../../../libs/src';
 import { UsersController } from '../controllers/users.controller';
 import { User } from '../entities/user.entity';
 import { UsersService } from '../services/users.service';

@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "user-service/users/types.proto";
+
+service RoleService {
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {}
+  rpc FindAllRoles(FindAllRolesRequest) returns (FindAllRolesResponse) {}
+  rpc FindOneRole(FindOneRoleRequest) returns (FindOneRoleResponse) {}
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {}
+  rpc RemoveRole(RemoveRoleRequest) returns (RemoveRoleResponse) {}
+}
+
+message CreateRoleRequest {
+  string name = 1;
+  string description = 2;
+  repeated string permission_ids = 3;
+}
+
+message CreateRoleResponse {
+  string status = 1;
+  string message = 2;
+  Role data = 3;
+  repeated string errors = 4;
+}
+
+message FindAllRolesRequest {
+  string page = 1;
+  string limit = 2;
+}
+
+message FindAllRolesResponse {
+  repeated Role roles = 1;
+}
+
+message FindOneRoleRequest {
+  string id = 1;
+}
+
+message FindOneRoleResponse {
+  Role role = 1;
+}
+
+message UpdateRoleRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  repeated string permission_ids = 4;
+}
+
+message UpdateRoleResponse {
+  string status = 1;
+  string message = 2;
+  Role data = 3;
+  repeated string errors = 4;
+}
+
+message RemoveRoleRequest {
+  string id = 1;
+}
+
+message RemoveRoleResponse {
+  string message = 1;
+}
